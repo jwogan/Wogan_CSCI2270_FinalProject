@@ -36,7 +36,8 @@ int beerInventory::hashSum(std::string ingredientName){  //x is the string to ha
 //the method expects a string and an integer, but entering two integers will not break the code, however, entering two strings will.
 //The method will also break if the same string is entered in multiple times
 //after calling the function, the ingredient should be placed in the hashtable.
-
+//Preconditions: indexes of the table are either empty or 'occipied'; if they are empty, they should be set to NULL
+//Postconditions: entered name is correctly indexed based on the hash function
 void beerInventory::insertIngredient(std::string name, int quantity){
     int index = hashSum(name);
     if(hashTable[index]->name == "init"){  // if nothing is at the index, place movie info in that index
@@ -86,7 +87,9 @@ int beerInventory::ingredientInIndex(int index){
         }
     }
 }
-
+//This method runs through every index and displays its contents. 
+//Preconditions: the table is not empty. If it is, a message will be displayed stating such
+//Postconditions: N/A
 void beerInventory::printInventory(){
     for(int i = 0; i < tableSize; i++){
         ingredient *x = hashTable[i];
@@ -104,7 +107,10 @@ void beerInventory::printInventory(){
         }
     }
 }
-
+//This method searches the hash table for a specific entry. 
+//The method expects the name of the string, the same string that was used to deteremine its postion in the table. 
+//If a different name/spelling/capitallization is used, the function will not return a correct result
+//preconditions: the table is not empty
 void beerInventory::findIngredient(std::string name)
 {
     int index = hashSum(name); //gives us the index that the title would in if it is in table
@@ -130,7 +136,9 @@ void beerInventory::findIngredient(std::string name)
         cout << "Ingredient not found" <<endl;
     }
 }
-
+//this method searches for an ingredient in the table, and if found, removes it. 
+//Preconditions: the table is not empty
+//Postconditions: the item is removed, with approprate pointers set to ensure continutity of table function
 void beerInventory::deleteIngredient(std::string name)
 {
     int index = hashSum(name);
