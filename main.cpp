@@ -1,12 +1,11 @@
 //Joseph Wogan
 //CSCI 2270 Final Project
 //Instructor: Rhonda Hoenigman
-
-
 #include <iostream>
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include <sstream>
 #include "beerInventory.h"
 #include "styleGuidelines.h"
 using namespace std;
@@ -31,6 +30,7 @@ void menuDisplay(){
 void menuSelect(){
     bool menuOpen = true;
     while(menuOpen == true){
+    cin.clear();
     string input;
     cin >> input;
     if(input == "1"){//rent
@@ -39,9 +39,19 @@ void menuSelect(){
         cin.ignore();
         getline(cin,name);
         cout << "Enter year:" << endl;
+        
+        // Makes sure the input is an integer
+        cin.clear();
+        string year;
         int quantity;
-        cin >> quantity;
-        inventory->insertIngredient(name, quantity);//BST->rentMovie(name);
+        getline(cin, year);
+        istringstream iss(year);
+        iss >> quantity;
+        if (!iss.eof()) {
+            cout << "Oops, that wasn't a valid quantity! Try again!" << endl;
+        } else {
+            inventory->insertIngredient(name, quantity);//BST->rentMovie(name);
+        }
     }
     if(input == "2"){
         string name;
@@ -105,6 +115,7 @@ void populate(){
     inventory->insertIngredient("Chocolate Malt", .5);
     inventory->insertIngredient("Black Malt",0);
 }
+
 int main()
 {
     //populate();
