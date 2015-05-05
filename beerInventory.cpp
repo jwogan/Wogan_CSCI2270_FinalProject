@@ -87,7 +87,7 @@ int beerInventory::ingredientInIndex(int index){
         }
     }
 }
-//This method runs through every index and displays its contents. 
+//This method runs through every index and displays its contents.
 //Preconditions: the table is not empty. If it is, a message will be displayed stating such
 //Postconditions: N/A
 void beerInventory::printInventory(){
@@ -107,8 +107,8 @@ void beerInventory::printInventory(){
         }
     }
 }
-//This method searches the hash table for a specific entry. 
-//The method expects the name of the string, the same string that was used to deteremine its postion in the table. 
+//This method searches the hash table for a specific entry.
+//The method expects the name of the string, the same string that was used to deteremine its postion in the table.
 //If a different name/spelling/capitallization is used, the function will not return a correct result
 //preconditions: the table is not empty
 void beerInventory::findIngredient(std::string name)
@@ -129,14 +129,14 @@ void beerInventory::findIngredient(std::string name)
         x = x->next;
     }
     if(found == true){
-        cout << ingredientTitle<< " : " << ingredientQuantity<< "lbs" <<endl;
+        cout << ingredientTitle<< " : " << ingredientQuantity<< " lbs" <<endl;
     }
     else
     {
         cout << "Ingredient not found" <<endl;
     }
 }
-//this method searches for an ingredient in the table, and if found, removes it. 
+//this method searches for an ingredient in the table, and if found, removes it.
 //Preconditions: the table is not empty
 //Postconditions: the item is removed, with approprate pointers set to ensure continutity of table function
 void beerInventory::deleteIngredient(std::string name)

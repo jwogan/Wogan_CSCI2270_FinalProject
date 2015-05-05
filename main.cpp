@@ -1,4 +1,4 @@
-//Joseph Wogan
+  //Joseph Wogan
 //CSCI 2270 Final Project
 //Instructor: Rhonda Hoenigman
 #include <iostream>
@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <sstream>
 #include "beerInventory.h"
+#include <vector>
 #include "styleGuidelines.h"
 using namespace std;
 
@@ -16,7 +17,7 @@ styleGuidelines *guidelineTable = new styleGuidelines();
 
 //menuSelect and menuDisplay are the means to which the user is able to view and select options for running the program.
 void menuDisplay(){
-    cout <<	"======Main Menu======" << endl;
+    cout <<	"\n======Main Menu======" << endl;
     cout <<	"1. Insert Ingredient" << endl;
     cout <<	"2. Delete Ingredient" << endl;
     cout <<	"3. Find Ingredient" << endl;
@@ -27,6 +28,24 @@ void menuDisplay(){
     cout <<	"8. Quit" << endl;
 }
 
+vector <string> ingredientsAdded;
+vector <string>::iterator ingredientsAddedIterator;
+
+int checkIfAdded(string ingredient){
+    for(int i = 0; i<ingredientsAdded.size();i++){
+        if(ingredient == ingredientsAdded[i])
+            return i;
+    }
+    return -1;
+}
+
+void iterate(int times){
+    ingredientsAddedIterator = ingredientsAdded.begin();
+    for(int i = 0;i<times;i++){
+    ingredientsAddedIterator++;
+    }
+}
+
 void menuSelect(){
     bool menuOpen = true;
     while(menuOpen == true){
@@ -34,34 +53,53 @@ void menuSelect(){
     string input;
     cin >> input;
     if(input == "1"){//rent
-        cout << "Enter title:";
+        cout << "Enter type:"<<endl;;
         string name;
         cin.ignore();
         getline(cin,name);
-        cout << "Enter year:" << endl;
-        
-        // Makes sure the input is an integer
-        cin.clear();
-        string year;
-        int quantity;
-        getline(cin, year);
-        istringstream iss(year);
-        iss >> quantity;
-        if (!iss.eof()) {
-            cout << "Oops, that wasn't a valid quantity! Try again!" << endl;
-        } else {
-            inventory->insertIngredient(name, quantity);//BST->rentMovie(name);
+
+        if(checkIfAdded(name) == -1){
+            cout << "Enter amount (lbs):" << endl;
+
+            // Makes sure the input is an integer
+            cin.clear();
+            string year;
+            int quantity;
+            getline(cin, year);
+            istringstream iss(year);
+            iss >> quantity;
+            if (!iss.eof()) {
+                cout << "Oops, that wasn't a valid quantity! Try again!" << endl;
+            } else {
+                inventory->insertIngredient(name, quantity);//BST->rentMovie(name);
+                ingredientsAdded.push_back(name);
+            }
+        }
+        else{
+            cout<< "That ingredient has already been added. Try deleting it first." << endl;
         }
     }
     if(input == "2"){
         string name;
-        cout << "Enter title:" << endl;
+        cout << "Enter type:" << endl;
         cin.ignore();
         getline(cin, name);
-        inventory->deleteIngredient(name);
+        int deleteIngredient = checkIfAdded(name);
+        cout<<"DI:"<<deleteIngredient<<endl;
+        iterate(deleteIngredient);
+        cout<<"Begin:"<<ingredientsAdded[deleteIngredient]<<endl;
+
+        //cout<<"Item:"<<ingredientsAdded[deleteIngredient]<<endl;
+        if(deleteIngredient != -1){
+            ingredientsAdded.erase(ingredientsAddedIterator);
+            inventory->deleteIngredient(name);
+        }
+        else{
+            cout<<"That ingredient has not been added."<<endl;
+        }
     }
     if(input == "3"){//delete the movie
-        cout << "Enter title:" << endl;
+        cout << "Enter type:" << endl;
         string name;
         cin.ignore();
         getline(cin,name);
@@ -71,14 +109,14 @@ void menuSelect(){
         inventory->printInventory();
     }
     if(input == "5"){
-        cout << "Enter name of ingredient"<<endl;
+        cout << "Enter name of ingredient: "<<endl;
         string test;
         cin.ignore();
         getline(cin, test);
         guidelineTable->findbaseInStyle(test);
     }
     if(input == "6"){
-        cout << "Enter name of ingredient"<<endl;
+        cout << "Enter name of ingredient: "<<endl;
         string test;
         cin.ignore();
         getline(cin, test);

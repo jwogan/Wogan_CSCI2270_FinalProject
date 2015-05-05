@@ -101,6 +101,7 @@ void styleGuidelines::viewStyles(){
     if(input == "1"){ // select stout as item to view
         cout << "What section of Stout would you like to view? "<<endl;
         cout << "----------------------------------------------"<<endl;
+        cout << "1.) Dry Stout\n2.) Sweet Stout\n3.) Oatmeal Stout\n4.) Foreign Extra Stout\n5.) American Stout\n6.) Russian Imperial\n" << endl;
         for(int i = 0; i < tableSize; i++){ //loop through the style hash table
             style *x = hashTable[i];
             while(x != NULL){
@@ -113,7 +114,7 @@ void styleGuidelines::viewStyles(){
         string selection;
         cin.ignore();
         getline(cin, selection);
-        if(selection  == "Dry Stout"){
+        if(selection  == "1"){
             cout << "What attribute would you like to view?"<<endl;
             cout << "---------------------------------------"<<endl;
             cout << "1. Base Malt"<<endl;
@@ -156,7 +157,7 @@ void styleGuidelines::viewStyles(){
                 cout << "Not a proper selection"<<endl;
             }
         }
-        else if(selection == "Sweet Stout"){
+        else if(selection == "2"){
             cout << "What attribute would you like to view?"<<endl;
             cout << "---------------------------------------"<<endl;
             cout << "1. Base Malt"<<endl;
@@ -199,7 +200,7 @@ void styleGuidelines::viewStyles(){
                 cout << "Not a proper selection"<<endl;
             }
         }
-        else if(selection == "Oatmeal Stout"){
+        else if(selection == "3"){
             cout << "What attribute would you like to view?"<<endl;
             cout << "---------------------------------------"<<endl;
             cout << "1. Base Malt"<<endl;
@@ -241,7 +242,7 @@ void styleGuidelines::viewStyles(){
                 cout << "Not a proper selection"<<endl;
             }
         }
-        else if(selection == "Foreign Extra Stout"){
+        else if(selection == "4"){
             cout << "What attribute would you like to view?"<<endl;
             cout << "---------------------------------------"<<endl;
             cout << "1. Base Malt"<<endl;
@@ -283,7 +284,7 @@ void styleGuidelines::viewStyles(){
                 cout << "Not a proper selection"<<endl;
             }
         }
-        else if(selection == "American Stout"){
+        else if(selection == "5"){
             cout << "What attribute would you like to view?"<<endl;
             cout << "---------------------------------------"<<endl;
             cout << "1. Base Malt"<<endl;
@@ -325,7 +326,7 @@ void styleGuidelines::viewStyles(){
                 cout << "Not a proper selection"<<endl;
             }
         }
-        else if(selection == "Russian Imperial Stout"){
+        else if(selection == "6"){
             cout << "What attribute would you like to view?"<<endl;
             cout << "---------------------------------------"<<endl;
             cout << "1. Base Malt"<<endl;
